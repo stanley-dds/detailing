@@ -211,30 +211,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+//плавная прокрутка КОЛЕСИКОМ мыши
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("header");
     const links = document.querySelectorAll("nav ul li a");
     const sections = document.querySelectorAll("section");
+    const scrollUp = document.getElementById("scroll-up");
     let isScrolling = false;
+    let currentTargetSection = null;
 
-    // 🟢 1️⃣ Плавная прокрутка к секции при клике на кнопку
+    // Настройка IntersectionObserver для определения момента завершения прокрутки.
+    const observerOptions = {
+        root: null,
+        threshold: 0.8 // Секция считается показанной, если видна минимум 80% её высоты
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.target === currentTargetSection) {
+                // Когда нужная секция отображается достаточно полно, снимаем блокировку.
+                isScrolling = false;
+                observer.unobserve(entry.target);
+                currentTargetSection = null;
+            }
+        });
+    }, observerOptions);
+
+    // Функция плавной прокрутки с использованием IntersectionObserver для разблокировки
+    function scrollToSection(section) {
+        if (isScrolling) return;
+        isScrolling = true;
+        currentTargetSection = section;
+        observer.observe(section);
+        section.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // 1️⃣ Плавная прокрутка к секции при наведении на кнопку навигации
     links.forEach(link => {
         link.addEventListener("mouseenter", (e) => {
             e.preventDefault();
             const targetId = link.getAttribute("href").substring(1);
-            document.getElementById(targetId).scrollIntoView({
-                behavior: "smooth"
-            });
+            const targetSection = document.getElementById(targetId);
+            scrollToSection(targetSection);
         });
     });
 
-    // 🟢 2️⃣ Подсветка активной кнопки при прокрутке
+    // 2️⃣ Подсветка активной кнопки при прокрутке
     function highlightNavLink() {
+        let scrollPosition = window.scrollY + header.offsetHeight;
         sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop - header.offsetHeight;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+            if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
                 links.forEach(link => link.classList.remove("active"));
                 links[index].classList.add("active");
             }
@@ -244,41 +272,43 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", highlightNavLink);
     highlightNavLink();
 
-    // 🟢 3️⃣ Прокрутка по колесику мыши к следующей/предыдущей секции
+    // 3️⃣ Прокрутка колесиком мыши с блокировкой до завершения анимации
     window.addEventListener("wheel", (event) => {
-        if (isScrolling) return; // Предотвращаем многократные срабатывания
+        if (isScrolling) return;
 
-        isScrolling = true;
-        setTimeout(() => isScrolling = false, 700); // Ограничиваем частоту
+        let currentSectionIndex = getCurrentSectionIndex();
+        if (event.deltaY > 0 && currentSectionIndex < sections.length - 1) {
+            scrollToSection(sections[currentSectionIndex + 1]);
+        } else if (event.deltaY < 0 && currentSectionIndex > 0) {
+            scrollToSection(sections[currentSectionIndex - 1]);
+        }
+    });
 
-        let currentSectionIndex = sections.length - 1;
+    // 5️⃣ Определение ближайшей секции
+    function getCurrentSectionIndex() {
+        let closestIndex = 0;
+        let minDistance = Math.abs(window.scrollY - sections[0].offsetTop);
+
         sections.forEach((section, index) => {
-            if (window.scrollY >= section.offsetTop - header.offsetHeight) {
-                currentSectionIndex = index;
+            let distance = Math.abs(window.scrollY - section.offsetTop);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
             }
         });
 
-        if (event.deltaY > 0 && currentSectionIndex < sections.length - 1) {
-            // Скроллим вниз
-            sections[currentSectionIndex + 1].scrollIntoView({ behavior: "smooth" });
-        } else if (event.deltaY < 0 && currentSectionIndex > 0) {
-            // Скроллим вверх
-            sections[currentSectionIndex - 1].scrollIntoView({ behavior: "smooth" });
-        }
-    });
+        return closestIndex;
+    }
 
-    // 🟢 4️⃣ Прокрутка вверх при нажатии на стрелку
-    const scrollUp = document.getElementById("scroll-up");
+    // 6️⃣ Прокрутка вверх при нажатии на стрелку
     scrollUp.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        scrollToSection(sections[0]);
     });
 
-    // Отображение стрелки вверх при скролле
+    // 7️⃣ Отображение стрелки вверх при скролле
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 200) {
-            scrollUp.style.opacity = "1";
-        } else {
-            scrollUp.style.opacity = "0";
-        }
+        scrollUp.style.opacity = window.scrollY > 200 ? "1" : "0";
     });
 });
+
+
