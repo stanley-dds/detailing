@@ -1,3 +1,6 @@
+
+//=================================================
+
 document.addEventListener("DOMContentLoaded", () => {
     const scrollDown = document.getElementById("scroll-down");
     const scrollUp = document.getElementById("scroll-up");
@@ -94,12 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Инициализация карусели
     updateCarousel();
 });
-
-
-
-
-
-
 
 
 
@@ -207,5 +204,81 @@ document.addEventListener("DOMContentLoaded", () => {
         footerVideo.scrollIntoView({
             behavior: "smooth"
         });
+    });
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const header = document.getElementById("header");
+    const links = document.querySelectorAll("nav ul li a");
+    const sections = document.querySelectorAll("section");
+    let isScrolling = false;
+
+    // 🟢 1️⃣ Плавная прокрутка к секции при клике на кнопку
+    links.forEach(link => {
+        link.addEventListener("mouseenter", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            document.getElementById(targetId).scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+    });
+
+    // 🟢 2️⃣ Подсветка активной кнопки при прокрутке
+    function highlightNavLink() {
+        sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop - header.offsetHeight;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                links.forEach(link => link.classList.remove("active"));
+                links[index].classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", highlightNavLink);
+    highlightNavLink();
+
+    // 🟢 3️⃣ Прокрутка по колесику мыши к следующей/предыдущей секции
+    window.addEventListener("wheel", (event) => {
+        if (isScrolling) return; // Предотвращаем многократные срабатывания
+
+        isScrolling = true;
+        setTimeout(() => isScrolling = false, 700); // Ограничиваем частоту
+
+        let currentSectionIndex = sections.length - 1;
+        sections.forEach((section, index) => {
+            if (window.scrollY >= section.offsetTop - header.offsetHeight) {
+                currentSectionIndex = index;
+            }
+        });
+
+        if (event.deltaY > 0 && currentSectionIndex < sections.length - 1) {
+            // Скроллим вниз
+            sections[currentSectionIndex + 1].scrollIntoView({ behavior: "smooth" });
+        } else if (event.deltaY < 0 && currentSectionIndex > 0) {
+            // Скроллим вверх
+            sections[currentSectionIndex - 1].scrollIntoView({ behavior: "smooth" });
+        }
+    });
+
+    // 🟢 4️⃣ Прокрутка вверх при нажатии на стрелку
+    const scrollUp = document.getElementById("scroll-up");
+    scrollUp.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Отображение стрелки вверх при скролле
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+            scrollUp.style.opacity = "1";
+        } else {
+            scrollUp.style.opacity = "0";
+        }
     });
 });
