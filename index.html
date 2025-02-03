@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detailing Center</title>
+     <!-- Функция перенаправления -->
+    <script>
+        (function() {
+        if (window.innerWidth < 768 && !window.location.href.includes("mobile.html")) {
+            window.location.href = "mobile.html";
+        }
+        })();
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>

@@ -1,0 +1,291 @@
+/* Основной сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    scroll-behavior: smooth;
+    background: #111;
+    color: white;
+  }
+  
+  /* Sticky Header для мобильной версии */
+  header#mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  
+  header#mobile-header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  header#mobile-header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 0 10px;
+    transition: opacity 0.3s;
+    /* Вертикальное расположение текста */
+    writing-mode: vertical-rl;
+  }
+  
+  header#mobile-header nav ul li a:hover {
+    opacity: 0.7;
+  }
+  
+  /* Видео-секция */
+  #video-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  #video-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #video-section #main-title {
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    writing-mode: vertical-rl;
+  }
+  
+  #video-section #scroll-down {
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 0.3s;
+  }
+  
+  /* Общие стили для секций */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+  }
+  
+  /* Заголовки секций с вертикальным текстом */
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Вертикальная карусель в секции "Тюнинг" */
+  .carousel-container {
+    width: 80%;
+    max-width: 400px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-item {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .carousel-item img {
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-item img:hover {
+    transform: scale(1.1);
+  }
+  
+  .carousel-item p {
+    font-size: 14px;
+    margin-top: 5px;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Вертикальное управление каруселью */
+  .carousel-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .carousel-navigation button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    font-size: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .carousel-navigation button:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Секция "Техцентр" (услуги) */
+  .services-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .service-item {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid white;
+    width: 80%;
+    text-align: center;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Секция "Детейлинг" */
+  #tech-center {
+    position: relative;
+    width: 100%;
+    padding: 60px 20px;
+    overflow: hidden;
+  }
+  
+  #tech-center .detailing-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    writing-mode: vertical-rl;
+  }
+  
+  .tech-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .tech-image {
+    text-align: center;
+  }
+  
+  .tech-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .tech-image img:hover {
+    transform: scale(1.1);
+  }
+  
+  .tech-image p {
+    font-size: 14px;
+    margin-top: 5px;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Секция "Контакты" */
+  #contacts {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #000;
+    overflow: hidden;
+  }
+  
+  .contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .contact-image {
+    flex: 1;
+    min-height: 150px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .contact-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Секция с видео в футере */
+  #footer-video {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #footer-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .footer-text {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+  }
+  
+  /* Стрелка вверх */
+  #scroll-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.3s;
+  }
+  

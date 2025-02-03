@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detailing Center – Mobile</title>
+  <link rel="stylesheet" href="mobile.css">
+  <!-- Подключение Swiper.js (если потребуется, можно добавить адаптированную версию) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Sticky Header для мобильной версии -->
+  <header id="mobile-header">
+    <nav>
+      <ul>
+        <li><a href="#tuning">Тюнинг</a></li>
+        <li><a href="#detailing">Техцентр</a></li>
+        <li><a href="#tech-center">Детейлинг</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Видео-блок. Используйте вертикальное видео (здесь media оставлены пустыми, замените при необходимости) -->
+  <section id="video-section">
+    <video autoplay muted loop playsinline>
+      <source src="vertical_video.mp4" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
+    <div class="overlay">
+      <h1 id="main-title">Your detailing center</h1>
+      <div id="scroll-down">↓</div>
+    </div>
+  </section>
+
+  <!-- Секция "Тюнинг" с вертикально ориентированной каруселью -->
+  <section id="tuning">
+    <!-- Заголовок с вертикальным текстом -->
+    <h1 class="section-title">#Тюнинг</h1>
+
+    <!-- Контейнер вертикальной карусели -->
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="vertical_support.png" alt="Тюнинг 1">
+          <p>Суппорта...</p>
+        </div>
+        <div class="carousel-item">
+          <img src="vertical_podveska.png" alt="Тюнинг 2">
+          <p>Подвески...</p>
+        </div>
+        <div class="carousel-item">
+          <img src="vertical_chip.png" alt="Тюнинг 3">
+          <p>Чип-тюнинг...</p>
+        </div>
+        <div class="carousel-item">
+          <img src="vertical_vyhlop.png" alt="Тюнинг 4">
+          <p>Выхлопная система...</p>
+        </div>
+        <div class="carousel-item">
+          <img src="vertical_turbo.png" alt="Тюнинг 5">
+          <p>Турбонаддув...</p>
+        </div>
+        <div class="carousel-item">
+          <img src="vertical_ref.png" alt="Тюнинг 6">
+          <p>Система охлаждения...</p>
+        </div>
+        <!-- Фиктивный элемент, если нужен -->
+        <div class="carousel-item">
+          <p style="visibility: hidden;">Пустое место</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Управление вертикальной каруселью -->
+    <div class="carousel-navigation">
+      <button class="up-arrow">↑</button>
+      <button class="down-arrow">↓</button>
+    </div>
+  </section>
+
+  <!-- Секция "Техцентр" -->
+  <section id="detailing">
+    <div class="services-container">
+      <div class="service-item">Комплексное Т.О</div>
+      <div class="service-item">Диагностика</div>
+      <div class="service-item">Шиномонтаж</div>
+      <div class="service-item">Сход-развал</div>
+    </div>
+  </section>
+
+  <!-- Секция "Детейлинг" с вертикальным расположением элементов -->
+  <section id="tech-center">
+    <div class="detailing-title">#ДЕТЕЙЛИНГ</div>
+    <div class="tech-content">
+      <div class="tech-image">
+        <img src="vertical_carbon.png" alt="Изображение 1">
+        <p>Карбон...</p>
+      </div>
+      <div class="tech-image">
+        <img src="vertical_kuzov.png" alt="Изображение 2">
+        <p>Кузов...</p>
+      </div>
+      <div class="tech-image">
+        <img src="vertical_poshiv.png" alt="Изображение 3">
+        <p>Пошив салона...</p>
+      </div>
+      <div class="tech-image">
+        <img src="vertical_salon.png" alt="Изображение 4">
+        <p>Детейлинг салона...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция "Контакты" -->
+  <section id="contacts">
+    <div class="contact-wrapper">
+      <div class="contact-image" id="contact1">
+        <p class="contact-text">
+          Киев, Украина<br>
+          +38 (050) 567-45-65<br>
+          boris@detailingkyiv.com
+        </p>
+      </div>
+      <div class="contact-image" id="contact2"></div>
+      <div class="contact-image" id="contact3"></div>
+      <div class="contact-image" id="contact4"></div>
+    </div>
+    <div id="scroll-down-contacts">↓</div>
+  </section>
+
+  <!-- Секция с видео в футере -->
+  <section id="footer-video">
+    <video autoplay muted loop playsinline>
+      <source src="vertical_finalVideo.mp4" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
+    <div class="footer-text">made by OnWebStudio</div>
+  </section>
+
+  <!-- Стрелка вверх -->
+  <div id="scroll-up">↑</div>
+
+  <script src="mobile.js"></script>
+</body>
+</html>
